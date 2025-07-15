@@ -1,4 +1,19 @@
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.xpath.*;
+import org.xml.sax.InputSource;
+
+class IO {
+    public static Logger logger = Logger.getLogger(IO.class.getName());
+}
+
 public class App {
+        
+        private boolean privateReturnsTrue() {
+            return true;
+        }
+        
         public void ident1() throws Throwable
         {
             String data;
@@ -6,7 +21,7 @@ public class App {
             {
                 data = ""; 
                 {
-                    File file = new File("C:\\data.txt");
+                    File file = new File("data.txt");
                     FileInputStream streamFileInput = null;
                     InputStreamReader readerInputStream = null;
                     BufferedReader readerBuffered = null;
@@ -87,7 +102,7 @@ public class App {
                 if (data != null)
                 {
                 
-                    String [] tokens = data.split("||");
+                    String [] tokens = data.split("\\|\\|");
                     if (tokens.length < 2)
                     {
                         return;
@@ -99,11 +114,21 @@ public class App {
                     InputSource inputXml = new InputSource(xmlFile);
                 
                 
-                    String query = "
+                    String query = "//users/user[login/text()='" + username + 
                                    "' and pass/text()='" + password + "']" +
                                    "/secret/text()";
                     String secret = (String)xPath.evaluate(query, inputXml, XPathConstants.STRING);
                 }
+            }
+        }
+        
+        public static void main(String[] args) {
+            App app = new App();
+            try {
+                app.ident1();
+            } catch (Throwable e) {
+                System.err.println("Error: " + e.getMessage());
+                e.printStackTrace();
             }
         }
 }
