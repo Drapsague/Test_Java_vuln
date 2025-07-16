@@ -117,7 +117,7 @@ public class App {
                     String query = "//users/user[login/text()='" + username + 
                                    "' and pass/text()='" + password + "']" +
                                    "/secret/text()";
-                    String secret = (String)xPath.evaluate(query, inputXml, XPathConstants.STRING);
+                    xPath.evaluate(query, inputXml, XPathConstants.STRING);
                 }
             }
         }
