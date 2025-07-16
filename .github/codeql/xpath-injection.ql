@@ -18,8 +18,6 @@ import semmle.code.java.security.XPath
  * A taint-tracking configuration for XPath injection vulnerabilities.
  */
 class XPathInjectionConfig extends TaintTracking::Configuration {
-  XPathInjectionConfig() { this = "XPathInjectionConfig" }
-
   override predicate isSource(DataFlow::Node source) {
     // File input sources
     exists(MethodAccess ma |
