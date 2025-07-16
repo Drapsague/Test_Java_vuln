@@ -1,4 +1,6 @@
 name: "Custom queries"
-disable-default-queries: true
+disable-default-queries: false
 queries:
+  - uses: security-extended
   - uses: ./.github/codeql/xpath-injection.ql
+  
