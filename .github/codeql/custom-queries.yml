@@ -1,5 +1,5 @@
 name: "Custom queries"
 disable-default-queries: true
 queries:
-  - uses: .github/codeql/xpath-injection.ql
+  - uses: ./.github/codeql/xpath-injection.ql
   
