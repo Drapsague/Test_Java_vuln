@@ -1,0 +1,8 @@
+- name: security-extended
+  description: Security queries with extended coverage
+  
+- name: security-and-quality  
+  description: Both security and code quality queries
+
+- uses: ./.github/codeql/xpath-injection.ql
+  description: Custom XPath injection detection
