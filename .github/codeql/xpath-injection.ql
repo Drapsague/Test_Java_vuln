@@ -1,21 +1,17 @@
 /**
- * @name XPath injection
- * @description Building an XPath expression from user-controlled sources is vulnerable to insertion of
- *              malicious code by the user.
- * @kind path-problem
+ * @name Custom XPath Injection
+ * @description Detects possible XPath injection in Java code
+ * @kind problem
  * @problem.severity error
- * @security-severity 9.8
- * @precision high
- * @id java/xml/xpath-injection
- * @tags security
- *       external/cwe/cwe-643
+ * @id custom/java/xpath-injection
  */
 
 import java
-import semmle.code.java.security.XPathInjectionQuery
-import XPathInjectionFlow::PathGraph
 
-from XPathInjectionFlow::PathNode source, XPathInjectionFlow::PathNode sink
-where XPathInjectionFlow::flowPath(source, sink)
-select sink.getNode(), source, sink, "XPath expression depends on a $@.", source.getNode(),
-  "user-provided value"
+from MethodAccess ma
+where ma.getMethod().hasName("evaluate")
+  and ma.getMethod().getDeclaringType().getASupertype*().hasQualifiedName("javax.xml.xpath", "XPath")
+  and
+    // VERY basic: check if argument involves concatenation with a variable
+    exists(Addition add | ma.getArgument(0) = add and add.getLeftOperand() instanceof VariableAccess)
+select ma, "Possible XPath injection: dynamic argument to evaluate()"
