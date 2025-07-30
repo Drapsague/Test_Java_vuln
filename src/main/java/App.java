@@ -9,19 +9,27 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.logging.Level;
-
+import java.util.logging.Logger;
 import javax.xml.xpath.*;
 
 import org.xml.sax.InputSource;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
-class IO {
-    public static Logger logger = Logger.getLogger(IO.class.getName());
+public class IO {
+    public static final Logger logger = Logger.getLogger(IO.class.getName());
+
+    public static void writeLine(String message) {
+        System.out.println(message);
+    }
 }
 
 public class App {
         
+        private boolean privateReturnsFalse() {
+            return false;
+        }
+
         private boolean privateReturnsTrue() {
             return true;
         }
